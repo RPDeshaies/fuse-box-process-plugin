@@ -1,27 +1,27 @@
 const spawn: any = require('child_process').spawn;
 
-interface IDictionary<T> {
+export interface IDictionary<T> {
     [key: string]: T;
 }
 
-interface IProcessDetail {
+export interface IProcessDetail {
     processName: string;
     processArgs: Array<string>;
     verbose: boolean;
 }
 
-interface IProcess {
+export interface IProcess {
     process: any;
     detail: IProcessDetail;
 }
 
-type IProcessHash = IDictionary<IProcess>;
+export type IProcessHash = IDictionary<IProcess>;
 
-interface IOptions {
+export interface IOptions {
     process: Array<IProcessDetail>;
 }
 
-class ProcessPluginClass {
+export class ProcessPluginClass {
     test: RegExp;
     opts: IOptions;
     processList: IProcessHash = {};

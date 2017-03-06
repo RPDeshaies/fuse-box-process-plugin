@@ -49,6 +49,7 @@ var ProcessPluginClass = (function () {
     };
     return ProcessPluginClass;
 }());
+exports.ProcessPluginClass = ProcessPluginClass;
 function ProcessPlugin(options) {
     return new ProcessPluginClass(options);
 }
