@@ -2,11 +2,22 @@
 A Plugin for fuse-box that gives you the ability to 
  run any tasks (npm, tsc, etc.) after fuse-box bundled your code
 
+## Installation
+Add this to your package.json
+
+```
+devDependencies : {
+  "fuse-box-process-plugin" : "git://github.com/RPDeshaies/fuse-box-process-plugin.git",
+}
+```
+
 
 ## How to use 
 To run npm tasks like `npm run lint` and `npm run server`
 
 ```
+const ProcessPlugin = require('fuse-box-process-plugin');
+
 let fuse = new FuseBox({
     homeDir: "src/",
     sourcemaps: true,
