@@ -4,6 +4,8 @@ A Plugin for fuse-box that gives you the ability to
 
 
 ## How to use 
+To run npm tasks like `npm run lint` and `npm run server`
+
 ```
 let fuse = new FuseBox({
     homeDir: "src/",
