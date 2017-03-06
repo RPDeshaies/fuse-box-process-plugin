@@ -30,14 +30,15 @@ class ProcessPluginClass {
     };
     start(): void {
         this.opts.process.forEach(detail => {
-            console.log(`Starting ${detail.processName} [{${detail.processArgs}]...`);
+            console.log(`Starting ${detail.processName} [${detail.processArgs}]...`);
             const process: IProcess = this.createProcess(detail);
             this.processList[detail.processName] = process;
         });
     }
     stop(): void {
         for (const key in this.processList) {
-            console.log(`Killing ...`);
+            const detail: IProcessDetail = this.processList[key].detail;
+            console.log(`Killing ${detail.processName} [${detail.processArgs}]...`);
             this.processList[key].process.kill();
             delete this.processList[key];
         }
@@ -60,7 +61,7 @@ class ProcessPluginClass {
             });
         }
         process.process.on('close', (code: any, signal: any) => {
-            console.log(`Finished ${detail.processName} [{${detail.processArgs}]...`);
+            console.log(`Finished ${detail.processName} [${detail.processArgs}]...`);
             delete this.processList[detail.processName];
         });
         return process;

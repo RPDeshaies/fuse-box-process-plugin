@@ -10,14 +10,15 @@ var ProcessPluginClass = (function () {
     ProcessPluginClass.prototype.start = function () {
         var _this = this;
         this.opts.process.forEach(function (detail) {
-            console.log("Starting " + detail.processName + " [{" + detail.processArgs + "]...");
+            console.log("Starting " + detail.processName + " [" + detail.processArgs + "]...");
             var process = _this.createProcess(detail);
             _this.processList[detail.processName] = process;
         });
     };
     ProcessPluginClass.prototype.stop = function () {
         for (var key in this.processList) {
-            console.log("Killing ...");
+            var detail = this.processList[key].detail;
+            console.log("Killing " + detail.processName + " [" + detail.processArgs + "]...");
             this.processList[key].process.kill();
             delete this.processList[key];
         }
@@ -41,7 +42,7 @@ var ProcessPluginClass = (function () {
             });
         }
         process.process.on('close', function (code, signal) {
-            console.log("Finished " + detail.processName + " [{" + detail.processArgs + "]...");
+            console.log("Finished " + detail.processName + " [" + detail.processArgs + "]...");
             delete _this.processList[detail.processName];
         });
         return process;
