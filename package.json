@@ -1,0 +1,30 @@
+{
+  "name": "fuse-box-process-plugin",
+  "version": "1.0.0",
+  "description": "A Plugin for fuse-box that gives you the ability to run any tasks (npm, tsc, etc.) after fuse-box bundled your code Edit",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RPDeshaies/fuse-box-process-plugin.git"
+  },
+  "keywords": [
+    "fuse-box",
+    "process",
+    "plugin"
+  ],
+  "author": "René-Pier Deshaies-Gélinas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RPDeshaies/fuse-box-process-plugin/issues"
+  },
+  "homepage": "https://github.com/RPDeshaies/fuse-box-process-plugin#readme",
+  "devDependencies": {
+    "@types/node": "^7.0.5",
+    "tslint": "^4.4.2",
+    "typescript": "^2.2.1"
+  }
+}

@@ -1,0 +1,28 @@
+{
+	"rules": {
+		"no-unused-expression": true,
+		"no-duplicate-variable": true,
+		"curly": true,
+		"class-name": true,
+		"semicolon": [
+			"always"
+		],
+		"triple-equals": true,
+		"array-type": [
+			"array"
+		],
+		"no-default-export": true,
+		"one-variable-per-declaration": [
+			true
+		],
+		"no-var-keyword": true,
+		"typedef": [
+			"arrow-parameter",
+			"call-signature",
+			"member-variable-declaration",
+			"parameter",
+			"property-declaration",
+			"variable-declaration"
+		]
+	}
+}
