@@ -16,7 +16,7 @@ devDependencies : {
 To run npm tasks like `npm run lint` and `npm run server`
 
 ```
-const ProcessPlugin = require('fuse-box-process-plugin');
+const ProcessPlugin = require('fuse-box-process-plugin').ProcessPlugin;
 
 let fuse = new FuseBox({
     homeDir: "src/",
