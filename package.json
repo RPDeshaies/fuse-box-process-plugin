@@ -1,6 +1,6 @@
 {
   "name": "fuse-box-process-plugin",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A Plugin for fuse-box that gives you the ability to run any tasks (npm, tsc, etc.) after fuse-box bundled your code Edit",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
