@@ -36,6 +36,12 @@ let fuse = new FuseBox({
 });
 ```
 
+## Typescript
+I love Typescript, so this project also has typings !:)
+```
+import { ProcessPlugin } from 'fuse-box-process-plugin';
+```
+
 ## Microsoft Windows...
 For Microsoft windows, you might need to do something like this to run commands : 
 
