@@ -7,6 +7,18 @@ A Plugin for fuse-box that gives you the ability to
 npm install fuse-box-process-plugin --save-dev
 ```
 
+## API
+```
+ProcessPlugin({
+    process: [{
+            processKey: '', // Uniq key that represent this process
+            processName: '', // Name of the process to execute
+            processArgs: [], // Args to pass to the process
+            verbose: true, // If the process needs to log to the console
+        }
+    ]
+}),
+```
 
 ## How to use 
 To run npm tasks like `npm run lint` and `npm run server`
@@ -21,11 +33,13 @@ let fuse = new FuseBox({
     plugins: [
         ProcessPlugin({
             process: [{
+                    processKey: 'npm run lint',
                     processName: 'npm',
                     processArgs: ['run', 'lint'],
                     verbose: true,
                 },
                 {
+                    processKey: 'npm run server',
                     processName: 'npm',
                     processArgs: ['run', 'server'],
                     verbose: false,
@@ -55,11 +69,13 @@ let fuse = new FuseBox({
     plugins: [
         ProcessPlugin({
             process: [{
+                    processKey: 'npm run lint',
                     processName: isWindows ? 'npm.cmd' : 'npm',
                     processArgs: ['run', 'lint'],
                     verbose: true,
                 },
                 {
+                    processKey: 'npm run server',
                     processName: isWindows ? 'npm.cmd' : 'npm',
                     processArgs: ['run', 'server'],
                     verbose: false,

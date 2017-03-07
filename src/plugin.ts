@@ -6,9 +6,21 @@ export interface IDictionary<T> {
 }
 
 export interface IProcessDetail {
+    /**
+     * Uniq key that represent this process
+     */
     processKey: string;
+    /**
+     * Name of the process to execute
+     */
     processName: string;
+    /**
+     * Args to pass to the process
+     */
     processArgs: Array<string>;
+    /**
+     * If the process needs to log to the console
+     */
     verbose: boolean;
 }
 
