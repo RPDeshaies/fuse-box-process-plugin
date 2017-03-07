@@ -49,17 +49,9 @@ export class ProcessPluginClass {
     }
     createProcess(detail: IProcessDetail): IProcess {
         const process: IProcess = {
-            process: spawn(detail.processName, detail.processArgs),
+            process: spawnProcess(detail.processName, detail.processArgs, detail.verbose),
             detail
         };
-        if (detail.verbose) {
-            process.process.stdout.on('data', (data: BufferSource) => {
-                console.log(data.toString());
-            });
-            process.process.stderr.on('data', (data: BufferSource) => {
-                console.log(data.toString());
-            });
-        }
         process.process.on('close', (code: any, signal: any) => {
             console.log(`Finished ${detail.processName} [${detail.processArgs}]...`);
             delete this.processList[detail.processName];
@@ -72,3 +64,9 @@ export function ProcessPlugin(options: IOptions): ProcessPluginClass {
     return new ProcessPluginClass(options);
 };
 
+function spawnProcess(processName: string, processArgs: Array<string>, verbose: boolean): any {
+    if (verbose) {
+        return spawn(processName, processArgs, { stdio: 'inherit' });
+    }
+    return spawn(processName, processArgs);
+}
