@@ -89,7 +89,7 @@ export class ProcessPluginClass {
         }
     }
     private createProcess(detail: IProcessDetail): IProcess {
-        const instance: any = spawnProcess(detail.processName, detail.processArgs, detail.verbose)
+        const instance: any = spawnProcess(detail.processName, detail.processArgs, detail.verbose);
         return instance;
     }
 }
