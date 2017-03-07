@@ -13,9 +13,10 @@ ProcessPlugin({
     process: [{
             processKey: '', // Uniq key that represent this process
             processName: '', // Name of the process to execute
-            processArgs: [], // Args to pass to the process
+            processArgs: Array<string>, // Args to pass to the process
             verbose: true, // If the process needs to log to the console
-        }
+            child : IProcessDetail // Any child process that needs to be executed once the parent as `exit`
+        } : IProcessDetail
     ]
 }),
 ```

@@ -22,10 +22,19 @@ export interface IProcessDetail {
      * If the process needs to log to the console
      */
     verbose: boolean;
+    /**
+     * Any child process that needs to be executed once the parent as `exit`
+     */
+    child?: IProcessDetail;
+}
+
+export interface IProcessInstance {
+    pid: number;
+    on: Function;
 }
 
 export interface IProcess {
-    process: any;
+    instance: IProcessInstance;
     detail: IProcessDetail;
 }
 
@@ -44,16 +53,13 @@ export class ProcessPluginClass {
     };
     start(): void {
         this.opts.process.forEach(detail => {
-            console.log(`Starting ${detail.processKey}...`);
-            const process: IProcess = this.createProcess(detail);
-            this.processList[detail.processKey] = process;
+            this.startProcess(detail);
         });
     }
     stop(): void {
         for (const key in this.processList) {
-            const detail: IProcessDetail = this.processList[key].detail;
-            console.log(`Killing ${detail.processKey}...`);
-            kill(this.processList[key].process.pid);
+            kill(this.processList[key].instance.pid);
+            logProcess('Killed', this.processList[key].detail, this.processList[key].instance);
             delete this.processList[key];
         }
     }
@@ -61,16 +67,30 @@ export class ProcessPluginClass {
         this.stop();
         this.start();
     }
-    createProcess(detail: IProcessDetail): IProcess {
-        const process: IProcess = {
-            process: spawnProcess(detail.processName, detail.processArgs, detail.verbose),
-            detail
-        };
-        process.process.on('close', (code: any, signal: any) => {
-            console.log(`Finished ${detail.processKey}...`);
+    private startProcess(detail: IProcessDetail): void {
+        logDetail('Starting', detail);
+        const instance: any = this.createProcess(detail);
+
+        instance.on('close', (code: any, signal: any) => {
+            logProcess('Finished', detail, instance);
             delete this.processList[detail.processKey];
         });
-        return process;
+
+        this.processList[detail.processKey] = {
+            instance,
+            detail,
+        };
+
+        if (detail.child) {
+            this.processList[detail.processKey].instance.on('exit', (code: any, signal: any) => {
+                console.log(`Parent "${detail.processKey}" is finished. Starting "${detail.child.processKey}"`);
+                this.startProcess(detail.child);
+            });
+        }
+    }
+    private createProcess(detail: IProcessDetail): IProcess {
+        const instance: any = spawnProcess(detail.processName, detail.processArgs, detail.verbose)
+        return instance;
     }
 }
 
@@ -83,4 +103,12 @@ function spawnProcess(processName: string, processArgs: Array<string>, verbose: 
         return spawn(processName, processArgs, { stdio: 'inherit' });
     }
     return spawn(processName, processArgs);
+}
+
+function logProcess(action: string, detail: IProcessDetail, instance: IProcessInstance): void {
+    console.log(`${action} "${detail.processKey}" (pid : ${instance.pid})`);
+}
+
+function logDetail(action: string, detail: IProcessDetail): void {
+    console.log(`${action} "${detail.processKey}"`);
 }
