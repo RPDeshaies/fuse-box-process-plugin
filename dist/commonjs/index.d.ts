@@ -1,1 +1,0 @@
-export { ProcessPlugin } from './plugin';
