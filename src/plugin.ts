@@ -41,7 +41,7 @@ export class ProcessPluginClass {
         for (const key in this.processList) {
             const detail: IProcessDetail = this.processList[key].detail;
             console.log(`Killing ${detail.processKey}...`);
-            kill(this.processList[key].process.pid)
+            kill(this.processList[key].process.pid);
             delete this.processList[key];
         }
     }
