@@ -7,7 +7,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "rootDir": "src/",
-        "outDir": "dist/commonjs",
+        "outDir": "dist/",
         "sourceMap": true
     },
     "include": [
