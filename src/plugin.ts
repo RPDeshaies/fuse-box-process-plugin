@@ -1,10 +1,12 @@
 const spawn: any = require('child_process').spawn;
+const kill: any = require('tree-kill');
 
 export interface IDictionary<T> {
     [key: string]: T;
 }
 
 export interface IProcessDetail {
+    processKey: string;
     processName: string;
     processArgs: Array<string>;
     verbose: boolean;
@@ -30,16 +32,16 @@ export class ProcessPluginClass {
     };
     start(): void {
         this.opts.process.forEach(detail => {
-            console.log(`Starting ${detail.processName} [${detail.processArgs}]...`);
+            console.log(`Starting ${detail.processKey}...`);
             const process: IProcess = this.createProcess(detail);
-            this.processList[detail.processName] = process;
+            this.processList[detail.processKey] = process;
         });
     }
     stop(): void {
         for (const key in this.processList) {
             const detail: IProcessDetail = this.processList[key].detail;
-            console.log(`Killing ${detail.processName} [${detail.processArgs}]...`);
-            this.processList[key].process.kill();
+            console.log(`Killing ${detail.processKey}...`);
+            kill(this.processList[key].process.pid)
             delete this.processList[key];
         }
     }
@@ -53,8 +55,8 @@ export class ProcessPluginClass {
             detail
         };
         process.process.on('close', (code: any, signal: any) => {
-            console.log(`Finished ${detail.processName} [${detail.processArgs}]...`);
-            delete this.processList[detail.processName];
+            console.log(`Finished ${detail.processKey}...`);
+            delete this.processList[detail.processKey];
         });
         return process;
     }
