@@ -1,4 +1,8 @@
 # fuse-box-process-plugin
+[![npm](https://img.shields.io/npm/v/fuse-box-process-plugin.svg?style=flat-square)](https://www.npmjs.com/package/fuse-box-process-plugin)
+[![license](https://img.shields.io/github/license/RPDeshaies/fuse-box-process-plugin.svg?style=flat-square)](https://github.com/RPDeshaies/fuse-box-process-plugin/blob/master/LICENSE)
+[![npm](https://img.shields.io/npm/dt/fuse-box-process-plugin.svg?style=flat-square)](https://www.npmjs.com/package/fuse-box-process-plugin)
+
 A Plugin for fuse-box that gives you the ability to 
  run any tasks (npm, tsc, etc.) after fuse-box bundled your code
 
