@@ -7,12 +7,12 @@ A Plugin for fuse-box that gives you the ability to
  run any tasks (npm, tsc, etc.) after fuse-box bundled your code
 
 ## Installation
-```
+```sh
 npm install fuse-box-process-plugin --save-dev
 ```
 
 ## API
-```
+```ts
 ProcessPlugin({
     process: [{
             processKey: '', // Uniq key that represent this process
@@ -28,7 +28,7 @@ ProcessPlugin({
 ## How to use 
 To run npm tasks like `npm run lint` and `npm run server`
 
-```
+```ts
 const ProcessPlugin = require('fuse-box-process-plugin').ProcessPlugin;
 
 let fuse = new FuseBox({
@@ -57,14 +57,14 @@ let fuse = new FuseBox({
 
 ## Typescript
 I love Typescript, so this project also has typings !:)
-```
+```ts
 import { ProcessPlugin } from 'fuse-box-process-plugin';
 ```
 
 ## Microsoft Windows...
 For Microsoft windows, you might need to do something like this to run commands : 
 
-```
+```ts
 const isWindows: boolean = /^win/.test(process.platform);
 
 let fuse = new FuseBox({
